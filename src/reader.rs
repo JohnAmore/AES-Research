@@ -10,10 +10,10 @@ fn read_lines(filename: &str) -> Vec<String> {
         .map(String::from)
         .collect()
 }
-
-pub fn read_message(filename: String) -> String {
-    read_to_string(filename).expect("Should have been able to read the file")
-}
+//NOTE: Future use function.
+//pub fn read_message(filename: String) -> String {
+//    read_to_string(filename).expect("Should have been able to read the file")
+//}
 
 pub fn fill_s_box() -> Vec<String> {
     let hexes: Vec<String> = read_lines("./sBox.txt");
