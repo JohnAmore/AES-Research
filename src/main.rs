@@ -1,8 +1,7 @@
-use std::fs;
-
+mod reader;
 pub fn main() {
-    let contents =
-        fs::read_to_string("./sBox.txt").expect("Should have been able to read the file");
-
-    println!("Content:\n{contents}");
+    let s_box = reader::fill_s_box();
+    for hex in s_box {
+        println!("{}", hex);
+    }
 }
