@@ -6,11 +6,13 @@ mod reader;
 //TODO: Refactor, use message struct that removes message & filename fields from here.
 struct State {
     state_box: Vec<u8>,
-    message: String,
-    filename: String,
 }
 
 impl State {
     //TODO: Complete function
-    fn fill_state(&self) {}
+    fn fill_state(&mut self, message: Message) {
+        for char in (0...16){
+            self.state_box[char] = message.content[(message.at + 1) + char]
+        }
+    }
 }
