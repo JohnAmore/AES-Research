@@ -10,9 +10,9 @@ struct State {
 
 impl State {
     //TODO: Complete function
-    fn fill_state(&mut self, message: Message) {
-        for char in (0...16){
-            self.state_box[char] = message.content[(message.at + 1) + char]
+    fn fill_state(&mut self, &mut message: Message) {
+        for char in (0..16) {
+            self.state_box[char] = message.content[(message.at + 1) + char];
         }
     }
 }

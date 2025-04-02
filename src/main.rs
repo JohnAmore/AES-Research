@@ -1,7 +1,10 @@
+mod add_round_key;
+mod keygen;
+mod mix_columns;
 mod reader;
-pub fn main() {
-    let s_box = reader::fill_s_box();
-    for hex in s_box {
-        println!("{}", hex);
-    }
-}
+mod shift_rows;
+mod state;
+mod sub_bytes;
+mod timer;
+
+pub fn main() {}
