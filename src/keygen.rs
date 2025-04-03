@@ -4,7 +4,8 @@ use rand::distributions::Alphanumeric;
 use rand::prelude::*;
 
 pub struct Key {
-    key: String,
+    pub key: String,
+    pub at: u8,
 }
 
 pub fn gen_key_AES() -> String {
