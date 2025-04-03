@@ -4,7 +4,7 @@ use rand::distributions::Alphanumeric;
 use rand::prelude::*;
 
 pub struct Key {
-    pub key: String,
+    pub content: String,
     pub at: u8,
 }
 

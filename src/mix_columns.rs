@@ -1,7 +1,7 @@
 // MixColumns
 //Galois Field multiplication with the P-Box.
 //
-//P-Box (Global constant)
+//P-Box
 //[2 3 1 1]
 //[1 2 3 1]
 //[1 1 2 3]
