@@ -1,22 +1,27 @@
 // Key generation
 // Use RNG to produce an alphanumeric key
+use rand::distributions::Alphanumeric;
 use rand::prelude::*;
-struct Key{
+
+pub struct Key {
     key: String,
 }
-pub fn gen_key_AES() -> String{
+
+pub fn gen_key_AES() -> String {
     let mut key = String::new();
-    for char in (0..16){
-        key.push(rng.sample(rand::distr::Alphanumeric) as char););
+    let mut rng = rand::thread_rng();
+    for _ in 0..16 {
+        key.push(rng.sample(Alphanumeric) as char);
     }
     key
 }
 
-//NOTE: For tweaked use after normal AES
+// NOTE: For tweaked use after normal AES
 pub fn gen_key_tweaked_AES() -> String {
-let mut key = String::new();
-    for char in (0..32){
-        key.push(rng.sample(rand::distr::Alphanumeric) as char););
+    let mut key = String::new();
+    let mut rng = rand::thread_rng();
+    for _ in 0..32 {
+        key.push(rng.sample(Alphanumeric) as char);
     }
     key
 }

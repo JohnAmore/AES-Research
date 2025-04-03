@@ -24,9 +24,11 @@
 //b => P-box polynomial value
 //hi_bit_set => Boolean value to check for any overloading bits (*1* 0000 0000), or x^8.
 
+use crate::state;
+
 fn hex_multiplication(a: u8, b: u8) -> u8 {
     let mut p = 0;
-    let mut hi_bit_set;
+    let mut hi_bit_set: bool;
     let mut a = a;
     let mut b = b;
     //Handle the multiplication through XOR
@@ -49,17 +51,18 @@ fn hex_multiplication(a: u8, b: u8) -> u8 {
     p
 }
 
-fn mix_columns(state: &mut State) {
+fn mix_columns(state: &mut state::State) {
     let mut temp = vec![0u8; 16];
-    //s0-s4 => Column elements
-    let s0 = state[i];
-    let s1 = state[i + 4];
-    let s2 = state[i + 8];
-    let s3 = state[i + 12];
     //For each column in state_box (4), compute matrix multiplication method and add it to the temp
     //vector.
     for c in 0..4 {
         let i = c;
+        //s0-s4 => Column elements
+        let s0 = state.state_box[i];
+        let s1 = state.state_box[i + 4];
+        let s2 = state.state_box[i + 8];
+        let s3 = state.state_box[i + 12];
+
         temp[i] = hex_multiplication(s0, 2)
             ^ hex_multiplication(s1, 3)
             ^ hex_multiplication(s2, 1)
@@ -78,5 +81,7 @@ fn mix_columns(state: &mut State) {
             ^ hex_multiplication(s3, 2);
     }
     //Set the new temp vector as the current state. MixColumns complete.
-    *state = temp;
+    for i in 0..state.state_box.len() {
+        state.state_box[i] = temp[i];
+    }
 }

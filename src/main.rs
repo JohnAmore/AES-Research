@@ -6,5 +6,5 @@ mod shift_rows;
 mod state;
 mod sub_bytes;
 mod timer;
-
+mod message;
 pub fn main() {}
