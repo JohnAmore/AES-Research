@@ -15,6 +15,12 @@ impl State {
         for char in (0..16) {
             self.state_box[char] = message.content.as_bytes()[(message.at as usize)];
             message.at += 1;
+            if message.at == message.content.len().try_into().unwrap() {
+                for i in message.at as usize..self.state_box.len().try_into().unwrap() {
+                    self.state_box[i] = 0;
+                }
+                break;
+            }
         }
     }
 }

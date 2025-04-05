@@ -51,7 +51,7 @@ fn hex_multiplication(a: u8, b: u8) -> u8 {
     p
 }
 
-fn mix_columns(state: &mut state::State) {
+pub fn mix_columns(state: &mut state::State) {
     let mut temp = vec![0u8; 16];
     //For each column in state_box (4), compute matrix multiplication method and add it to the temp
     //vector.

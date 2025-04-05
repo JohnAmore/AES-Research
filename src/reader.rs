@@ -26,6 +26,7 @@ pub fn fill_s_box() -> Vec<u8> {
             eprintln!("Invalid hex string: {}", hex);
         }
     }
+    assert!(s_box.len() == 256, "The s-box is not big enough");
 
     s_box
 }

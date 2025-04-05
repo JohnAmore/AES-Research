@@ -2,7 +2,7 @@
 // Use RNG to produce an alphanumeric key
 use rand::distributions::Alphanumeric;
 use rand::prelude::*;
-
+#[derive(Clone)]
 pub struct Key {
     pub content: String,
     pub at: u8,
