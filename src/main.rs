@@ -5,6 +5,7 @@ mod add_round_key;
 mod keygen;
 mod message;
 mod mix_columns;
+mod output_times;
 mod reader;
 mod shift_rows;
 mod state;
@@ -16,6 +17,8 @@ mod timer;
 
 pub fn main() {
     //No time recorded here. Record after state filled.
+
+    let mut times: Vec<f32> = Vec::new();
     //Fill s-box.
     let sub_box: sub_bytes::sub_box = sub_bytes::sub_box {
         sub_box: fill_s_box(),
@@ -31,13 +34,14 @@ pub fn main() {
     let mut state_box: state::State = state::State {
         state_box: vec![0u8; 16],
     };
+    //Start time
     let time = timer::get_time();
 
+    //Iterations/rounds
     while data.at < data.content.len().try_into().unwrap() {
         //Fill the state box with 16 bytes.
         state_box.fill_state(&mut data);
-        //Start time
-        for round in 0..16 {
+        for _ in 0..16 {
             sub_bytes::sub_bytes(&mut state_box, &sub_box);
             shift_rows::shift_rows(&mut state_box);
             mix_columns::mix_columns(&mut state_box);
@@ -46,5 +50,10 @@ pub fn main() {
         println!("{:?}", state_box.state_box);
     }
     let time_taken = timer::get_time_taken(time);
-    println!("Time taken: {} seconds", time_taken);
+
+    times.push(time_taken);
+
+    for time in times {
+        output_times::output_times_aes(time);
+    }
 }
