@@ -8,7 +8,7 @@ pub struct Key {
     pub at: u8,
 }
 
-pub fn gen_key_AES() -> String {
+pub fn gen_key_content_aes() -> String {
     let mut key = String::new();
     let mut rng = rand::thread_rng();
     for _ in 0..16 {
@@ -18,7 +18,7 @@ pub fn gen_key_AES() -> String {
 }
 
 // NOTE: For tweaked use after normal AES
-pub fn gen_key_tweaked_AES() -> String {
+pub fn gen_key_content_tweaked_aes() -> String {
     let mut key = String::new();
     let mut rng = rand::thread_rng();
     for _ in 0..32 {

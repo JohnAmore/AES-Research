@@ -11,9 +11,10 @@ pub struct State {
 }
 
 impl State {
-    fn fill_state(&mut self, message: &mut message::Message) {
+    pub fn fill_state(&mut self, message: &mut message::Message) {
         for char in (0..16) {
-            self.state_box[char] = message.content.as_bytes()[(message.at as usize + 1) + char];
+            self.state_box[char] = message.content.as_bytes()[(message.at as usize)];
+            message.at += 1;
         }
     }
 }

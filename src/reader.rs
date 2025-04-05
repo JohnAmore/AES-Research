@@ -3,7 +3,7 @@
 // FILE I/O
 use std::fs::read_to_string;
 
-fn read_lines(filename: &str) -> Vec<String> {
+fn read_lines(filename: String) -> Vec<String> {
     read_to_string(filename)
         .unwrap()
         .lines()
@@ -14,11 +14,18 @@ pub fn read_message(filename: String) -> String {
     read_to_string(filename).expect("Should have been able to read the file")
 }
 
-pub fn fill_s_box() -> Vec<String> {
-    let hexes: Vec<String> = read_lines("./sBox.txt");
+pub fn fill_s_box() -> Vec<u8> {
+    let hexes: Vec<String> = read_lines("./sBox.txt".to_string());
     let mut s_box = Vec::new();
+
     for hex in hexes {
-        s_box.push(hex);
+        let hex = hex.trim();
+        if let Ok(byte) = u8::from_str_radix(hex, 16) {
+            s_box.push(byte);
+        } else {
+            eprintln!("Invalid hex string: {}", hex);
+        }
     }
+
     s_box
 }

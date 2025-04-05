@@ -9,6 +9,7 @@ pub struct Message {
 
 impl Message {
     pub fn create(file: String) -> Message {
+        assert!(!file.is_empty(), "String should not be empty");
         let mut message: String = String::new();
         let fcontent = reader::read_message(file.clone());
         Message {

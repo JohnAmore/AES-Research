@@ -27,7 +27,12 @@ pub fn add_round_key_improved(state: &mut state::State, key: keygen::Key) {
 
 pub fn export_key(key: keygen::Key) -> std::io::Result<()> {
     //Exports key to a file
-    let mut file = File::create("key.txt")?;  // Create or overwrite a file
-    file.write_all(key.content.as_bytes())?;           // Write data as bytes
+    let mut file = File::create("key.txt")?; // Create or overwrite a file
+    file.write_all(key.content.as_bytes())?; // Write data as bytes
     Ok(())
+}
+
+pub fn xor_key_improved_aes(key: keygen::Key) {
+    let key1 = &key.content[0..key.content.len() / 2];
+    let key2 = &key.content[(key.content.len() / 2 + 1)..key.content.len()];
 }
